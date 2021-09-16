@@ -1,6 +1,6 @@
 //accessToken variable will hold the user's access token
 let accessToken;
-const clientId = '2141e03cafa2420aa68567fdff1d7a7f';
+const clientId = '[Client ID Key]'; //alpha-numeric string
 const redirectUri = 'http://localhost:3000/';
 
 
