@@ -1,6 +1,6 @@
 //accessToken variable will hold the user's access token
 let accessToken;
-const clientId = '[Client ID API Key]'; // alpha-numeric string
+const clientId = '[client id]'; //alpa numeric string
 const redirectUri = 'http://localhost:3000/';
 
 
@@ -14,7 +14,6 @@ const Spotify = {
         //Checking to see if Access Token Matches
         const redirecedtURL = window.location.href;
         const accessTokenMatch = redirecedtURL.match(/access_token=([^&]*)/);
-        console.log("Match", accessTokenMatch)
         const expiresInMatch = redirecedtURL.match(/expires_in=([^&]*)/);
 
         if (accessTokenMatch && expiresInMatch) {
@@ -24,10 +23,10 @@ const Spotify = {
             //Clearing Parameters fron url inorder to prevent the app using the token after permission has expired. The app will grab a new access token when the old expires.
             window.setTimeout(() => {
                 accessToken = '';
-         }, expiresIn * 1000);
-         window.history.pushState('Access Token', null, '/');
+            }, expiresIn * 1000);
+            window.history.pushState('Access Token', null, '/');
 
-            
+
 
             return accessToken;
         } else {
@@ -73,7 +72,6 @@ const Spotify = {
                 }
             })
             .then((jsonResponse) => {
-                console.log("Jig", jsonResponse)
                 if (!jsonResponse.tracks) {
                     return [];
                 } else {
@@ -91,34 +89,36 @@ const Spotify = {
     },
 
     savePlaylist(playlistName, trackURI) {
-        if (playlistName && trackURI.length > 0) {
-            this.getUserID()
-                .then((jsonResponse) => {
-                    const userID = jsonResponse.id;
-                    const headers = {
-                        Authorization: `Bearer ${accessToken}`
-                    }
-                    return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
-                        headers: headers,
-                        method: 'POST',
-                        body: JSON.stringify({ name: playlistName })
-                    })
-                        .then((response) => { return response.json() })
-                        .then((jsonResponse) => {
-                            const playlistID = jsonResponse.id;
-                            return playlistID;
-                        })
-                        .then((playlistID) => {
-                            const endpoint = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`
-                            return fetch(endpoint, {
-                                headers: headers,
-                                method: 'POST',
-                                'Content-Type': 'application/json',
-                                body: JSON.stringify({ "uris": trackURI })
-                            })
-                        })
+        if(playlistName && trackURI.length > 0) {
+            const accessToken = this.getAccessToken();
+            const headers = {
+                Authorization: `Bearer ${accessToken}`
+            }            
+            let userID;
 
+            return this.getUserID()
+            .then((userID) => {
+                return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                    headers: headers,
+                    method: 'POST', 
+                    body: JSON.stringify({name: playlistName})
                 })
+                .then((response) => { return response.json()})
+                .then((jsonResponse) => {
+                    const playlistID = jsonResponse.id;
+                    return playlistID;
+                })
+                .then((playlistID) => {
+                    const endpoint = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`
+                    return fetch(endpoint, {
+                        headers: headers,
+                        method: 'POST', 
+                        'Content-Type':'application/json', 
+                        body: JSON.stringify({"uris": trackURI})
+                    }) 
+                })
+
+            })
         } else { return }
     },
 }
