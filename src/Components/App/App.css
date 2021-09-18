@@ -1,23 +1,31 @@
 body,
-html,
 #root {
-  height: 100%;
-  width: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 html {
-  font-size: 18px;
+  font-size: 62.5%;
+}
+
+
+body {
+  background-color: rgb(19,21,25);
+  background-image: linear-gradient(219deg, rgba(19,21,25,1) 0%, rgba(22,26,32,1) 15%, rgba(29,37,42,1) 30%, rgba(35,50,57,1) 45%, rgba(29,37,42,1) 60%, rgba(22,26,32,1) 75%, rgba(19,21,25,1) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 h1 {
   padding: .77rem 0;
-  background-color: #010c3f;
+  background-color: transparent;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.88rem;
+  font-size: 3rem;
   color: #fff;
+  margin: 0;
 }
 
 h1 .highlight {
@@ -26,31 +34,42 @@ h1 .highlight {
 
 h2 {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.55rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #fff;
+  margin-top: 0;
+}
+
+.App-container {
+  height: 100%;
 }
 
 .App {
   height: 100%;
-  padding: 0 17% 10% 17%;
-  background-color: #131519;
-  background-image: linear-gradient(147deg, #131519 0%, #233239 60%, #131519 100%);  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
   font-family: 'Work Sans', sans-serif;
   font-weight: 500;
   color: #fff;
+  display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.App-playlist {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.App-search, .App-playlist, .App-playListAll {
+  width: 35%;
+  border-radius: 1rem;
+  background-color: rgba(0,0,0,.15);
+  margin: 0 2rem;
+  padding: 0;
 }
+
 
 @media only screen and (max-width: 1020px) {
-  .App-playlist {
+  .App-search, .App-playlist, .App-playListAll {
     align-items: center;
     flex-direction: column;
+    max-width: 90%;
   }
 }
