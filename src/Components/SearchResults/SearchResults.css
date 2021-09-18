@@ -1,20 +1,25 @@
 .SearchResults {
-    width: 50%;
-    height: 950px;
+    width: 95%;
+    height: 960px;
     overflow-y: scroll;
-    padding: .88rem;
-    background-color: rgba(1, 12, 63, 0.7);
-    box-shadow: 0 4px 2px 2px #000000;
+    padding-left: 1rem;
+    margin-top: 0;
+    background-color: transparent;
   }
   
-  ::-webkit-scrollbar {
-      width: 0px;
-      background: transparent;
-  }
+
+/* --- Controls the scroll bar display - so that it is invisible ---*/  
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
   
-  @media only screen and (max-width: 1020px) {
-    .SearchResults {
-      width: 90%;
-      margin-bottom: 2rem;
-    }
+
+/* --- Media Query ---*/
+
+@media only screen and (max-width: 1020px) {
+  .SearchResults {
+    width: 90%;
+    margin-bottom: 2rem;
   }
+}
