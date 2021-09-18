@@ -10,7 +10,7 @@ class Playlist extends React.Component {
         super(props);
 
 
-        this.handleNameChange = this.handleNameChange.bind(this);  
+        this.handleNameChange = this.handleNameChange.bind(this);
     }
 
 
@@ -22,9 +22,10 @@ class Playlist extends React.Component {
     render() {
         return (
             <div className="Playlist">
+                <h2>save new playlist to Spotify</h2>
                 <input placeholder={this.props.playlistName} onChange={this.handleNameChange} />
-                <Tracklist tracks={this.props.playlist} action={this.props.onRemove} isRemoval={true}/>
-                <button className="Playlist-save" onClick={this.props.onSave}>SAVE TO SPOTIFY</button>
+                <button className="Playlist-save" onClick={this.props.onSave}>save to spotify</button>
+                <Tracklist tracks={this.props.playlist} action={this.props.onRemove} isRemoval={true} />
             </div>
         )
     }
