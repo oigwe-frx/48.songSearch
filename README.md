@@ -16,14 +16,14 @@ Upon providing permission, the user will be redirected to the app home. They are
 
 After the user searches, 20 of the most relevant matches are displayed. The user can scroll and read the basic descriptions for each match. The user can click on the plus icon (+) to add the track to the third column (playlist builder).
 
-![Authorization Page!](./walkthrough/3.PNG)
+![App Screenshot 1!](./walkthrough/3.PNG)
 
-![Authorization Page!](./walkthrough/4.PNG)
+![App Screenshot 2!](./walkthrough/4.PNG)
 
 Once the tracks are added to the playlist builder, the user can either remove the added tracks from the playlist or once satisified save the playlist to their Spotify account. 
 
 Once saved the user has saved the playlist, they can return to the device that holds their Spotify app and enjoy the playlist.
 
-![Authorization Page!](./walkthrough/5.PNG)
+![App Screenshot 3!](./walkthrough/5.PNG)
 
-
+![Spotify App Screenshot!](./walkthrough/IMG-0673.PNG)
