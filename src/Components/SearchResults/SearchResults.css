@@ -1,0 +1,22 @@
+.SearchResults {
+    width: 95%;
+    height: 960px;
+    overflow-y: scroll;
+    padding-left: 1rem;
+    margin-top: 0;
+    background-color: transparent;
+  }
+  
+
+/*Controls the scroll bar display - so that it is invisible*/  
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+  
+@media only screen and (max-width: 1020px) {
+  .SearchResults {
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+}
