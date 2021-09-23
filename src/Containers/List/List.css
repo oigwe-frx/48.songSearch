@@ -1,0 +1,83 @@
+.List {
+    border-radius: 1rem;
+    background-color: rgba(0,0,0,.15);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Controls the scroll bar display - so that it is invisible ---*/  
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* -- HEADINGS --*/
+.List h2 {
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.List .highlight {
+    color: #6c41ec;
+}
+
+
+/* --- Album photo --- */
+.List-icon {
+    width: 30%;
+}
+
+.List-icon img {
+    width: 100%;
+}
+
+
+/* --- Playlist information --- */
+.List-information {
+    width: 70%;
+    padding-left: 2.5rem;
+    padding-top: 0;
+}
+
+.List ul {
+    width: 100%;
+    height: 95%;
+    padding-left: 2rem;
+    padding-right: 1rem;
+    
+}
+
+.List li {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 0.5rem;
+    width: 90%;
+
+}
+
+
+.List p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.List h3 {
+    margin-bottom: .22rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+.List-description {
+    color: grey;
+    font-weight: 700;
+}
