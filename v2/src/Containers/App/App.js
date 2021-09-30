@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Spinner } from 'reactstrap';
+import { Container, Row, Col, Spinner, Alert } from 'reactstrap';
 
 import './App.css';
 
@@ -20,16 +20,15 @@ import Spotify from '../../util/Spotify';
 function App() {
 
 
-  const [accessToken, setAccessToken] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState('playlist name');
   const [playlistTracks, setPlaylistTracks] = useState([]); //newly created playlist
   const [usersLists, setUsersLists] = useState([]); //playlist retrieved from Spotify Account
   const [userInfo, setUserInfo] = useState();
   const [mounted, setMounted] = useState(false);
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
-    const dataFetch = setTimeout(() => {
       Spotify.getUserInfo()
         .then((user) => {
           setUserInfo(user);
@@ -42,9 +41,7 @@ function App() {
               setUsersLists(playListsAll.items);
             })
         })
-    }, 3000);
 
-    return (() => { clearTimeout(dataFetch) });
   }, []);
 
 
@@ -58,11 +55,11 @@ function App() {
     }
     addedTrack.push(track);
     setPlaylistTracks(addedTrack);
+    setAlert({color: 'alert-success', text: `${track.name} was added to the playlist`});
+    setTimeout(() => {
+      setAlert(null)
+    }, 1000)
   }
-
-  useEffect(() => {
-  }, [playlistTracks])
-
 
 
   //Remove track from playlist that will be created
@@ -71,6 +68,10 @@ function App() {
       return song.id !== track.id;
     });
     setPlaylistTracks(updatedList);
+    setAlert({color: 'alert-danger', text: `${track.name} was removed from the playlist`});
+    setTimeout(() => {
+      setAlert(null)
+    }, 1000)
   }
 
 
@@ -93,16 +94,17 @@ function App() {
       Spotify.getUserPlaylists(userInfo.id)
       .then((playListsAll) => {
         setUsersLists(playListsAll.items);
-        setPlaylistName('playlist name');
-        setPlaylistTracks([]);
-        setSearchResults([]);
+        setAlert({color: 'alert-info', text: `${playlistName} was added to your Spotify account`});
+    setTimeout(() => {
+      setAlert(null)
+    }, 3000);
+    setPlaylistName('playlist name');
+    setPlaylistTracks([]);
+    setSearchResults([]);
       })
     })
    
   }
-
-  useEffect(() => {
-  }, [usersLists])
 
   //Search for tracks
   const handleSearch = async (searchTerm) => {
@@ -117,7 +119,7 @@ function App() {
     <>
       {
         mounted === false ?
-          <Spinner animation="grow" role="status">
+          <Spinner animation="grow" role="status" style={{color: '#fff', margin: '5rem', fontSize: '3rem', padding: '5rem'}}>
             <span className="visually-hidden">Loading...</span>
           </Spinner> :
           <>
@@ -141,7 +143,11 @@ function App() {
                   <PlaylistBuilder playlistName={playlistName} playlist={playlistTracks} onRemove={removeTrack} onNameChange={updatePlaylistName} onSave={savePlaylist} />
                 </Col>
               </Row>
-              <Row style={{ height: '15%' }}>Yolo</Row>
+              <Row style={{ height: '15%' }}>
+                {
+                   alert ? <Alert className={`${alert.color} Alert`}>{alert.text}</Alert> : <></>
+                }
+              </Row>
             </Container>
           </>
       }
@@ -149,103 +155,5 @@ function App() {
     </>
   );
 }
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
 
-//     this.state = {
-//       accessToken: '',
-//       searchResults: [],
-//       playlistName: 'playlist name',
-//       playlistTracks: [], //Newly created playlist
-//       userLists: [] //Playlist retrieved from Spotify account
-//     }
-
-//     this.addTrack = this.addTrack.bind(this);
-//     this.removeTrack = this.removeTrack.bind(this);
-//     this.updatePlaylistName = this.updatePlaylistName.bind(this);
-//     this.savePlaylist = this.savePlaylist.bind(this);
-//     this.search = this.search.bind(this);
-//     this.listPlaylists = this.listPlaylists.bind(this);
-//   }
-
-
-//   //Add track to playlist that will be created
-//   addTrack(track) {
-//     let addedTracks = this.state.playlistTracks;
-
-//     if (addedTracks.find(savedTrack => savedTrack.id === track.id)) {
-//       return;
-//     }
-//     addedTracks.push(track);
-//     this.setState({ playlistTracks: addedTracks });
-//   }
-
-//   //Remove track from playlist that will be created
-//   removeTrack(track) {
-//     const { playlistTracks } = this.state;
-//     const updatedList = playlistTracks.filter((song) => {
-//       return song.id !== track.id;
-//     });
-//     this.setState({ playlistTracks: updatedList });
-//   }
-
-
-//   //Used to name the playlist that will be created
-//   updatePlaylistName(name) {
-//     this.setState({ playlistName: name });
-//   }
-
-
-//   //Save the new playlist to the user's Spotify account
-//   savePlaylist() {
-//     const trackURI = [];
-//     const { playlistTracks } = this.state;
-
-//     playlistTracks.forEach((track) => {
-//       trackURI.push(track.uri);
-//     })
-
-//     Spotify.savePlaylist(this.state.playlistName, trackURI)
-//     //const updatedPlaylist = Spotify.getUserPlaylists()
-//     this.setState({
-//       playlistName: 'playlist name',
-//       playlistTracks: [],
-//       //userLists: updatedPlaylist,
-//     });
-//   }
-
-
-//   //Retrieve already created playlist names from user's Spotify account
-//   async listPlaylists() {
-//     const playListAll = await Spotify.getUserPlaylists();
-//     this.setState({ userLists: playListAll.items });
-//   }
-
-//   //Search for tracks
-//   async search(searchTerm) {
-//     const results = await Spotify.search(searchTerm);
-//     this.setState({ searchResults: results });
-//   }
-
-//   render() {
-//     return (
-//       <div className='App-container'>
-//         <h1>song<span className="highlight">Search</span></h1>
-//         <div className="App">
-//           <div className="App-list App-playlistAll">
-//             <List userLists={this.listPlaylists} />
-//           </div>
-//           <div className="App-list">
-//             <SearchBar onSearch={this.search} />
-//             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-//           </div>
-//           <div className="App-list">
-//             <Playlist playlistName={this.state.playlistName} playlist={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} />
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 export default App;
