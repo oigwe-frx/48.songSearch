@@ -36,24 +36,6 @@ h2 {
   margin-top: 0;
 }
 
-.App-container {
-  height: 100%;
-}
-
-/*const fontFamily = 'Roboto, sans-serif';
-const fontSize = '5vh';
-const backgroundColor = '#fff';
-const minHeight = '100%';
-const minWidth = '100%';
-const display = 'flex';
-const flexDirection = 'row';
-const alignItems = 'center';
-const justifyContent = 'center';
-const color = 'grey';
-const marginTop = '20px';
-const width = '50%';
-const fontWeight = 700;*/
-
 .App {
   font-weight: 700;
   color: #fff;
@@ -71,18 +53,8 @@ const fontWeight = 700;*/
   padding: 0;
 }
 
-
-@media only screen and (max-width: 1020px) and (orientation: portrait) {
-  
-  .App {
-  }
-
-  .App-list {
-    width: 50%;
-    margin: 0;
-  }
-
-  .App-playlistAll {
-    display:none;
-  }
+.Alert {
+  padding: 2rem;
+  font-size: 2rem;
 }
+
