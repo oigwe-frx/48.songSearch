@@ -1,0 +1,88 @@
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+
+body {
+  background-color: rgb(19,21,25);
+  background-image: linear-gradient(219deg, rgba(19,21,25,1) 0%, rgba(22,26,32,1) 15%, rgba(29,37,42,1) 30%, rgba(35,50,57,1) 45%, rgba(29,37,42,1) 60%, rgba(22,26,32,1) 75%, rgba(19,21,25,1) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  padding: .77rem 0;
+  background-color: transparent;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin: 0;  
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #fff;
+  margin-top: 0;
+}
+
+.App-container {
+  height: 100%;
+}
+
+/*const fontFamily = 'Roboto, sans-serif';
+const fontSize = '5vh';
+const backgroundColor = '#fff';
+const minHeight = '100%';
+const minWidth = '100%';
+const display = 'flex';
+const flexDirection = 'row';
+const alignItems = 'center';
+const justifyContent = 'center';
+const color = 'grey';
+const marginTop = '20px';
+const width = '50%';
+const fontWeight = 700;*/
+
+.App {
+  font-weight: 700;
+  color: #fff;
+  height: 100% !important;
+}
+
+.App-list {
+  border-radius: 1rem;
+  background-color: rgba(0,0,0,.15);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0 1rem;
+  padding: 0;
+}
+
+
+@media only screen and (max-width: 1020px) and (orientation: portrait) {
+  
+  .App {
+  }
+
+  .App-list {
+    width: 50%;
+    margin: 0;
+  }
+
+  .App-playlistAll {
+    display:none;
+  }
+}
