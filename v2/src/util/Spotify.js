@@ -1,8 +1,7 @@
 //accessToken variable will hold the user's access token
 let accessToken;
-const clientId = 'faf84b97a9534c229d747d686b46df18'; //alpa numeric string
+const clientId = '[Client ID]'; //alpa numeric string provided by API
 const redirectUri = 'http://localhost:3000/';
-//const redirectUri = 'https://jovial-babbage-005ef0.netlify.app/';
 
 
 
