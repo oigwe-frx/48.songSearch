@@ -1,0 +1,18 @@
+.Button {
+    cursor: pointer;
+    width: 9rem;
+    padding: .5rem 0;
+    border-radius: 1.5rem;
+    background-color: #6C41EC;
+    text-align: center;
+    /*fontSize: 1.2rem;*/
+    transition: background-color .25s;
+    border: 0;
+    color: #fff;
+    font-weight: 700;
+    height: 37.5%;
+  }
+
+.Button:hover {
+    background-color: rgba(108, 65, 233, .7);
+}

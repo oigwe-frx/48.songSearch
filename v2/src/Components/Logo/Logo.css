@@ -1,0 +1,15 @@
+
+.Logo {
+    display: inline-flex;
+    vertical-align: baseline;
+    width: '20%';
+    margin: 0;
+    padding: 1.5rem 2rem;
+    color: #fff,
+}
+
+
+.highlight {
+    color: #9340FE;
+    font-weight: 700;
+}
