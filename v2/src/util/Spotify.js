@@ -80,7 +80,6 @@ const Spotify = {
                     return [];
                 } else {
                     return jsonResponse.tracks.items.map((track) => {
-                        console.log(track.album.images[0].url)
                         return {
                             id: track.id,
                             name: track.name,
