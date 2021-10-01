@@ -1,22 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './SearchResults.css';
 
 import Tracklist from '../../Containers/Tracklist/Tracklist';
 import Headings from '../Headings/Headings';
 
-class SearchResults extends React.Component {
-    render() {
-        return (
-            <div className="SearchResults">
+const SearchResults = (props) => {
+    return (
+        <div className="SearchResults">
             {
-                this.props.searchResults.length > 0 ? <> <Headings text='results'/>
-                <Tracklist tracks={this.props.searchResults} action={this.props.onAdd} isRemoval={false}/></> : <></>
+                props.searchResults.length > 0 ? <> <Headings text='results' />
+                    <Tracklist tracks={props.searchResults} action={props.onAdd} isRemoval={false} /></> : <></>
             }
-                
-            </div>
-        )
-    }
+
+        </div>
+    )
+}
+
+SearchResults.propTypes = {
+    searchResults: PropTypes.array.isRequired, 
+    onAdd: PropTypes.func.isRequired, 
 }
 
 export default SearchResults;

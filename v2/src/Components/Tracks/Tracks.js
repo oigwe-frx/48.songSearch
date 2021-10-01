@@ -1,16 +1,19 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
+ 
 import './Tracks.css';
 
 import TrackItem from '../TrackItem/TrackItem';
 
-class Tracks extends React.Component {
-    
-    render() {
-        return (
-            <TrackItem key={this.props.info.id} info={this.props.info} name={this.props.info.name} artists={this.props.info.artists} album={this.props.info.album} onClick={this.props.action} text={this.props.text}/>
-        )
-    }
+const Tracks = (props) => {
+    return (
+        <TrackItem key={props.info.id} image={props.info.image} info={props.info} name={props.info.name} artists={props.info.artists} album={props.info.album} onClick={props.action} text={props.text} />
+    )
 }
+
+Tracks.propTypes = {
+    info: PropTypes.object.isRequired, 
+}
+
 
 export default Tracks;

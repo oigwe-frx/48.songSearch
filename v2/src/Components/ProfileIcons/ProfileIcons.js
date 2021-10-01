@@ -14,9 +14,9 @@ const ProfileIcons = (props) => {
     );
 }
 
-// ProfileIcons.propTypes = {
-//     src: PropTypes.string, 
-//     name: PropTypes.string, 
-// }
+ProfileIcons.propTypes = {
+    src: PropTypes.string, 
+    name: PropTypes.string, 
+}
 
 export default ProfileIcons;
