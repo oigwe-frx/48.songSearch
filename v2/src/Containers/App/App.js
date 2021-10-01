@@ -3,15 +3,22 @@ import { Container, Row, Col, Spinner, Alert } from 'reactstrap';
 
 import './App.css';
 
-//import SearchBar from '../SearchBar/INSearchBar';
-import SearchResults from '../../Components/SearchResults/SearchResults';
-import PlaylistBuilder from '../PlaylistBuilder/PlaylistBuilder';
-import PlaylistList from '../../Components/PlaylistList/PlaylistList';
 
-
+//Containers/Components
 //Header
 import Logo from '../../Components/Logo/Logo';
 import SearchBar from '../SearchBar/SearchBar';
+
+//User's Established Playlists
+import PlaylistList from '../../Components/PlaylistList/PlaylistList';
+
+//Search Results
+import SearchResults from '../../Components/SearchResults/SearchResults';
+
+//Playlist Builder
+import PlaylistBuilder from '../PlaylistBuilder/PlaylistBuilder';
+
+
 
 //Util
 import Spotify from '../../util/Spotify';
@@ -28,25 +35,26 @@ function App() {
   const [mounted, setMounted] = useState(false);
   const [alert, setAlert] = useState(null);
 
+
+  //Mounting -> loads and stores user information and user playlists
   useEffect(() => {
-      Spotify.getUserInfo()
-        .then((user) => {
-          setUserInfo(user);
-          setMounted(!mounted);
-          return user.id
-        })
-        .then((id) => {
-          Spotify.getUserPlaylists(id)
-            .then((playListsAll) => {
-              setUsersLists(playListsAll.items);
-            })
-        })
+    Spotify.getUserInfo()
+      .then((user) => {
+        setUserInfo(user);
+        setMounted(!mounted);
+        return user.id
+      })
+      .then((id) => {
+        Spotify.getUserPlaylists(id)
+          .then((playListsAll) => {
+            setUsersLists(playListsAll.items);
+          })
+      })
 
   }, []);
 
 
-  //ACTIONS
-
+  //User Actions
   //Add track to playlist that will be created
   const addTrack = (track) => {
     let addedTrack = [...playlistTracks];
@@ -55,7 +63,7 @@ function App() {
     }
     addedTrack.push(track);
     setPlaylistTracks(addedTrack);
-    setAlert({color: 'alert-success', text: `${track.name} was added to the playlist`});
+    setAlert({ color: 'alert-success', text: `${track.name} was added to the playlist` });
     setTimeout(() => {
       setAlert(null)
     }, 1000)
@@ -68,7 +76,7 @@ function App() {
       return song.id !== track.id;
     });
     setPlaylistTracks(updatedList);
-    setAlert({color: 'alert-danger', text: `${track.name} was removed from the playlist`});
+    setAlert({ color: 'alert-danger', text: `${track.name} was removed from the playlist` });
     setTimeout(() => {
       setAlert(null)
     }, 1000)
@@ -90,20 +98,20 @@ function App() {
     })
 
     Spotify.savePlaylist(playlistName, trackURI, userInfo.id)
-    .then(() => {
-      Spotify.getUserPlaylists(userInfo.id)
-      .then((playListsAll) => {
-        setUsersLists(playListsAll.items);
-        setAlert({color: 'alert-info', text: `${playlistName} was added to your Spotify account`});
-    setTimeout(() => {
-      setAlert(null)
-    }, 3000);
-    setPlaylistName('playlist name');
-    setPlaylistTracks([]);
-    setSearchResults([]);
+      .then(() => {
+        Spotify.getUserPlaylists(userInfo.id)
+          .then((playListsAll) => {
+            setUsersLists(playListsAll.items);
+            setAlert({ color: 'alert-info', text: `${playlistName} was added to your Spotify account` });
+            setTimeout(() => {
+              setAlert(null)
+            }, 1000);
+            setPlaylistName('playlist name');
+            setPlaylistTracks([]);
+            setSearchResults([]);
+          })
       })
-    })
-   
+
   }
 
   //Search for tracks
@@ -119,7 +127,7 @@ function App() {
     <>
       {
         mounted === false ?
-          <Spinner animation="grow" role="status" style={{color: '#fff', margin: '5rem', fontSize: '3rem', padding: '5rem'}}>
+          <Spinner animation="grow" role="status" style={{ color: '#fff', margin: '5rem', fontSize: '3rem', padding: '5rem' }}>
             <span className="visually-hidden">Loading...</span>
           </Spinner> :
           <>
@@ -129,7 +137,7 @@ function App() {
                   <Logo />
                 </Col>
                 <Col xs={{ size: 8, offset: 1 }}>
-                  <SearchBar onSearch={handleSearch} />
+                  <SearchBar onSearch={handleSearch}/>
                 </Col>
               </Row>
               <Row style={{ height: '65%' }}>
@@ -145,7 +153,7 @@ function App() {
               </Row>
               <Row style={{ height: '15%' }}>
                 {
-                   alert ? <Alert className={`${alert.color} Alert`}>{alert.text}</Alert> : <></>
+                  alert ? <Alert className={`${alert.color} Alert`}>{alert.text}</Alert> : <></>
                 }
               </Row>
             </Container>
