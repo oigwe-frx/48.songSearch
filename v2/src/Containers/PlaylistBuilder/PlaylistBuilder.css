@@ -1,0 +1,14 @@
+.Playlist {
+  width: 95%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1rem 3rem 0 3rem;
+  margin-top: 0;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+  
