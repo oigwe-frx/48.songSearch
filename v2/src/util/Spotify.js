@@ -1,6 +1,6 @@
 //accessToken variable will hold the user's access token
 let accessToken;
-const clientId = '[Client ID]'; //alpa numeric string provided by API
+const clientId = '[CLIENT ID]'; //alpa numeric string
 const redirectUri = 'http://localhost:3000/';
 
 
@@ -42,10 +42,10 @@ const Spotify = {
             Authorization: `Bearer ${accessToken}`
         }
         return fetch('https://api.spotify.com/v1/me', { headers: headers })
-            .then((response) => { 
+            .then((response) => {
                 const jsonResponse = response.json();
                 return jsonResponse
-             }, (networkError) => {return 'Error: Please refresh Page'})
+            }, (networkError) => { return 'Error: Please refresh Page' })
             .then((jsonResponse) => {
                 return jsonResponse;
             })
@@ -61,7 +61,7 @@ const Spotify = {
             .then((response) => { return response.json() })
     },
 
-    search(searchTerm) {
+    async search(searchTerm) {
         accessToken = this.getAccessToken();
         const endpoint = `https://api.spotify.com/v1/search?type=track&q=${searchTerm}`
         return fetch(endpoint, {
@@ -80,12 +80,14 @@ const Spotify = {
                     return [];
                 } else {
                     return jsonResponse.tracks.items.map((track) => {
+                        console.log(track.album.images[0].url)
                         return {
                             id: track.id,
                             name: track.name,
                             artists: track.artists[0].name,
                             album: track.album.name,
-                            uri: track.uri
+                            uri: track.uri,
+                            image: track.album.images[0].url
                         }
                     })
                 }
@@ -93,18 +95,18 @@ const Spotify = {
     },
 
     async savePlaylist(playlistName, trackURI, userID) {
-        if(playlistName && trackURI.length > 0) {
+        if (playlistName && trackURI.length > 0) {
             const accessToken = this.getAccessToken();
             const headers = {
                 Authorization: `Bearer ${accessToken}`
-            }            
-    
+            }
+
             return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
-                    headers: headers,
-                    method: 'POST', 
-                    body: JSON.stringify({name: playlistName})
-                })
-                .then((response) => { return response.json()})
+                headers: headers,
+                method: 'POST',
+                body: JSON.stringify({ name: playlistName })
+            })
+                .then((response) => { return response.json() })
                 .then((jsonResponse) => {
                     const playlistID = jsonResponse.id;
                     return playlistID;
@@ -113,13 +115,13 @@ const Spotify = {
                     const endpoint = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`
                     return fetch(endpoint, {
                         headers: headers,
-                        method: 'POST', 
-                        'Content-Type':'application/json', 
-                        body: JSON.stringify({"uris": trackURI})
-                    }) 
+                        method: 'POST',
+                        'Content-Type': 'application/json',
+                        body: JSON.stringify({ "uris": trackURI })
+                    })
                 })
 
-            
+
         } else { return }
     },
 }
