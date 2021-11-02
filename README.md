@@ -23,7 +23,7 @@ The major changes between version 1 and version 2 occur within the realms of des
 
 ![!](./walkthrough/2-redesign.PNG)
 
-- The flow of the app remains the same. The user searches, and the search results appear in the center of the app screen. The design difference is that unlike version 1, the search results and the build playlist sections will only appear to the user whent the user needs them (after searching, and after adding a track to the to-be-created playlist). This decision was made with the hope that the app is more intuitive, less confusing and thus more usuable.
+- The flow of the app remains the same. The user searches, and the search results appear in the center of the app screen. The design difference is that unlike version 1, the search results and the build playlist sections will only appear to the user when the user needs them (after searching, and after adding a track to the to-be-created playlist). This decision was made with the hope that the app is more intuitive, less confusing and thus more usuable.
 
 ![!](./walkthrough/3-redesign.PNG)
 
