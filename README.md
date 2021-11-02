@@ -12,8 +12,8 @@ The major changes between version 1 and version 2 occur within the realms of des
 
 **Regarding readability:**
 - **Reactstrap** was used primarily in the App componenet to provide easier to read layout JSX.
-- In version 1, class components were used. In version 2, all class components were transformed into **functional components** inorder to use **React hooks**.
-- The components that existed in version 1, were broken down into more simplifed components inorder to better reuse components, and prevent unncessary code.
+- In version 1, class components were used. In version 2, all class components were transformed into **functional components** in order to use **React hooks**.
+- The components that existed in version 1, were broken down into more simplifed components in order to better reuse components, and prevent unncessary code.
 - A more definitive design pattern was used when **differntiating containers from presentational components**. In version 2, containers are components that handle logic, such as setting state. 
 - **propTypes** were introduced to provide prop validation and simplify prop documentation. 
 
